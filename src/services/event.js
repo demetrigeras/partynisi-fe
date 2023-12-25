@@ -10,6 +10,15 @@ export const getEvents = async () => {
   }
 };
 
+export const getEventsByUser = async (userId) => {
+  try {
+    const response = await api.get(`/event/user/${userId}`);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const getEvent = async (id) => {
     try {
       const response = await api.get(`/event/${id}`);
@@ -19,6 +28,7 @@ export const getEvent = async (id) => {
       throw error;
     }
   };
+
 
 export const createEvent = async (event) => {
     try {

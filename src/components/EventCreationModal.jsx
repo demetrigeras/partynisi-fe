@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import {createEvent} from '../services/event.js'
+import React, { useState, useEffect } from 'react';
+import {createEvent, updateEvent} from '../services/event.js'
 
 const modalOverlayStyle = {
     position: 'fixed',
@@ -27,7 +27,7 @@ const modalOverlayStyle = {
 
 
 
-const EventCreationModal = ({ closeModal }) => {
+const EventCreationModal = ({ closeModal, isEditMode, existingEventData }) => {
   const [eventData, setEventData] = useState({
     title: '',
     description: '',
@@ -36,6 +36,12 @@ const EventCreationModal = ({ closeModal }) => {
     // host will be set based on the logged-in user
   });
 
+  useEffect(() => {
+    if (isEditMode && existingEventData) {
+      setEventData(existingEventData);
+    }
+  }, [isEditMode, existingEventData]);
+  
   const handleChange = (event) => {
     const { name, value } = event.target;
     setEventData({ ...eventData, [name]: value });
@@ -43,12 +49,33 @@ const EventCreationModal = ({ closeModal }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const newEvent = await createEvent(eventData);
-    console.log('Event created:', newEvent);
-    // Logic to create the event
-    // After creating the event, you can close the modal:
-    closeModal();
+    try {
+      let response;
+      if (isEditMode) {
+        response = await updateEvent(existingEventData._id, eventData);
+        console.log('Event updated:', response);
+      } else {
+        response = await createEvent(eventData);
+        console.log('Event created:', response);
+      }
+      closeModal();
+    } catch (error) {
+      console.error('Error handling the event:', error);
+    }
   };
+
+
+//   const handleUpdate = async (event) => {
+//     event.preventDefault();
+//     try {
+//       const updatedEvent = await updateEvent(existingEventData._id, eventData);
+//       console.log('Event updated:', updatedEvent);
+//       closeModal();
+//     } catch (error) {
+//       console.error('Error updating the event:', error);
+//       // Handle errors appropriately
+//     }
+//   };
 
   return (
     <div className="modal">

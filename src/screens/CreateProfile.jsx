@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Nav from "../components/Nav.jsx";
 import { useNavigate } from "react-router-dom";
-import { createProfile } from "../services/profile.js";
+import { createProfile} from "../services/profile.js";
+// import { getEventsByUser } from "../services/event.js";
+
 
 const CreateProfile = ({ user }) => {
   const navigate = useNavigate();
@@ -19,6 +21,18 @@ const CreateProfile = ({ user }) => {
       setProfileData((prevData) => ({ ...prevData, user: user.id }));
     }
   }, [user]);
+
+  // const [events, setEvents] = useState([]);
+  // const [isModalOpen, setIsModalOpen] = useState(false);
+  // const [currentEvent, setCurrentEvent] = useState(null);
+
+  // const handleEditEvent = (eventData) => {
+  //   setCurrentEvent(eventData);
+  //   setIsModalOpen(true);
+  // };
+
+
+  
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -95,3 +109,4 @@ const CreateProfile = ({ user }) => {
 };
 
 export default CreateProfile;
+  
