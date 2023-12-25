@@ -10,9 +10,9 @@ export const getProfiles = async () => {
   }
 };
 
-export const getProfile = async (id) => {
+export const getProfile = async (userId) => {
     try {
-      const response = await api.get(`/profile/${id}`);
+      const response = await api.get(`/profile/${userId}`);
       return response.data;
     } catch (error) {
       console.error(`Failed to get charity - error: ${error}`);

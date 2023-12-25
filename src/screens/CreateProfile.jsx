@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Nav from "../components/Nav.jsx";
 import { useNavigate } from "react-router-dom";
-import {createProfile} from "../services/profile.js";
+import { createProfile } from "../services/profile.js";
 
 const CreateProfile = ({ user }) => {
   const navigate = useNavigate();
