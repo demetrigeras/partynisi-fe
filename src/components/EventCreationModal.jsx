@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect} from 'react';
 import {createEvent, updateEvent} from '../services/event.js'
 
 const modalOverlayStyle = {
@@ -27,27 +27,39 @@ const modalOverlayStyle = {
 
 
 
-const EventCreationModal = ({ closeModal, isEditMode, existingEventData }) => {
+const EventCreationModal = ({ closeModal, isEditMode, existingEventData, userId, onEventUpdated }) => {
   const [eventData, setEventData] = useState({
     title: '',
     description: '',
     dateTime: '',
     location: '',
-    // host will be set based on the logged-in user
+    userId: '',
   });
+
 
   useEffect(() => {
     if (isEditMode && existingEventData) {
-      setEventData(existingEventData);
+      setEventData(existingEventData); // Load existing event data for editing
+    } else {
+      setEventData({ title: '', description: '', dateTime: '', location: '', user: userId }); // Reset for new event creation
     }
-  }, [isEditMode, existingEventData]);
+  }, [isEditMode, existingEventData, userId]);
   
   const handleChange = (event) => {
     const { name, value } = event.target;
     setEventData({ ...eventData, [name]: value });
   };
 
-  const handleSubmit = async (event) => {
+//   const handleSubmit = async (event) => {
+//     event.preventDefault();
+//     const newEvent = await createEvent(eventData);
+//     console.log('Event created:', newEvent);
+//     // Logic to create the event
+//     // After creating the event, you can close the modal:
+//     closeModal();
+//   };
+
+const handleSubmit = async (event) => {
     event.preventDefault();
     try {
       let response;
@@ -55,9 +67,10 @@ const EventCreationModal = ({ closeModal, isEditMode, existingEventData }) => {
         response = await updateEvent(existingEventData._id, eventData);
         console.log('Event updated:', response);
       } else {
-        response = await createEvent(eventData);
+        response = await createEvent({ ...eventData, user: userId });
         console.log('Event created:', response);
       }
+      onEventUpdated(response); // Call the callback function with the response
       closeModal();
     } catch (error) {
       console.error('Error handling the event:', error);
@@ -82,13 +95,14 @@ const EventCreationModal = ({ closeModal, isEditMode, existingEventData }) => {
          <div style={modalOverlayStyle}>
       <div style={modalContentStyle}>
       <form onSubmit={handleSubmit}>
-        <h2>Create Event</h2>
+      <h2>{isEditMode ? 'Edit Event' : 'Create Event'}</h2>
         {/* Event form inputs */}
         <input name="title" value={eventData.title} onChange={handleChange} placeholder="Title" />
         <textarea name="description" value={eventData.description} onChange={handleChange} placeholder="Description" />
         <input name="dateTime" type="datetime-local" value={eventData.dateTime} onChange={handleChange} />
         <input name="location" value={eventData.location} onChange={handleChange} placeholder="Location" />
-        <button type="submit">Create</button>
+        <button type="submit">{isEditMode ? 'Edit' : 'Create'}</button>
+        {/* <button type="submit">Create</button> */}
         <button onClick={closeModal}>Cancel</button>
       </form>
     </div>
