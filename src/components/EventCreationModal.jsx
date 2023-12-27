@@ -1,5 +1,5 @@
 import React, { useState, useEffect} from 'react';
-import {createEvent, updateEvent} from '../services/event.js'
+import {createEvent} from '../services/event.js'
 
 const modalOverlayStyle = {
     position: 'fixed',
@@ -35,7 +35,7 @@ const EventCreationModal = ({ closeModal, isEditMode, existingEventData, userId,
     location: '',
     userId: '',
   });
-
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
   useEffect(() => {
     if (isEditMode && existingEventData) {
@@ -59,23 +59,45 @@ const EventCreationModal = ({ closeModal, isEditMode, existingEventData, userId,
 //     closeModal();
 //   };
 
+// const handleSubmit = async (event) => {
+//     event.preventDefault();
+//     try {
+//       let response;
+//       if (isEditMode) {
+//         response = await updateEvent(existingEventData._id, eventData);
+//         console.log('Event updated:', response);
+//       } else {
+//         response = await createEvent({ ...eventData, user: userId });
+//         console.log('Event created:', response);
+//       }
+//       onEventUpdated(response); // Call the callback function with the response
+//       closeModal();
+//     } catch (error) {
+//       console.error('Error handling the event:', error);
+//     }
+//   };
+
 const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      let response;
-      if (isEditMode) {
-        response = await updateEvent(existingEventData._id, eventData);
-        console.log('Event updated:', response);
-      } else {
-        response = await createEvent({ ...eventData, user: userId });
-        console.log('Event created:', response);
-      }
-      onEventUpdated(response); // Call the callback function with the response
-      closeModal();
+      // Since we're only creating new events, no need to check for isEditMode
+      const response = await createEvent({ ...eventData, user: userId });
+      console.log('Event created:', response);
+      
+      // Notify the parent component about the new event
+    //   onEventUpdated(response);
+      setShowSuccessMessage(true);
+      console.log('ShowSuccessMessage:', showSuccessMessage);
+      setTimeout(() => {
+        closeModal();
+        setShowSuccessMessage(false);
+        window.location.reload();  // Reset the success message state
+      }, 1000); // Close modal after 1 second
     } catch (error) {
-      console.error('Error handling the event:', error);
+      console.error('Error creating the event:', error);
     }
   };
+  
 
 
 //   const handleUpdate = async (event) => {
@@ -101,6 +123,7 @@ const handleSubmit = async (event) => {
         <textarea name="description" value={eventData.description} onChange={handleChange} placeholder="Description" />
         <input name="dateTime" type="datetime-local" value={eventData.dateTime} onChange={handleChange} />
         <input name="location" value={eventData.location} onChange={handleChange} placeholder="Location" />
+        {showSuccessMessage && <p>Event {isEditMode ? 'Updated' : 'Created'} Successfully!</p>}
         <button type="submit">{isEditMode ? 'Edit' : 'Create'}</button>
         {/* <button type="submit">Create</button> */}
         <button onClick={closeModal}>Cancel</button>

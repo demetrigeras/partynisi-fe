@@ -29,8 +29,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} user={user} />
         <Route path="/create-profile" element={<CreateProfile user={user} />} />
-        <Route path="/dionhp" element={<Dionhp user={user} />} />
-        <Route path="/profile" element={<Profilehp user={user} />} />
+        <Route path="/dionhp" element={<Dionhp user={user}  />} />
+        <Route path="/profile/:userId" element={<Profilehp user={user}  />} />
         <Route path="/sign-up" element={<SignUp setUser={setUser} />} />
       <Route path="/sign-in" element={<SignIn setUser={setUser} />} />
       <Route path="/sign-out" element={<SignOut setUser={setUser} />} />
