@@ -36,3 +36,198 @@
     transform: rotate(360deg);
   }
 }
+
+
+
+/* CSS */
+.SignIn-Up-button {
+  align-items: center;
+  background-color: #FFFFFF;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: .25rem;
+  box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+  box-sizing: border-box;
+  color: rgba(0, 0, 0, 0.85);
+  cursor: pointer;
+  display: inline-flex;
+  font-family: system-ui,-apple-system,system-ui,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  justify-content: center;
+  line-height: 1.25;
+  margin: 0;
+  min-height: 3rem;
+  padding: calc(.875rem - 1px) calc(1.5rem - 1px);
+  position: relative;
+  text-decoration: none;
+  transition: all 250ms;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+  width: auto;
+}
+
+.button-6:hover,
+.button-6:focus {
+  border-color: rgba(0, 0, 0, 0.15);
+  box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+  color: rgba(0, 0, 0, 0.65);
+}
+
+.button-6:hover {
+  transform: translateY(-1px);
+}
+
+.button-6:active {
+  background-color: #F0F0F1;
+  border-color: rgba(0, 0, 0, 0.15);
+  box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
+  color: rgba(0, 0, 0, 0.65);
+  transform: translateY(0);
+}
+
+.SignIn-Up-container{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-top: 32%;
+  margin-left: 46%;
+
+}
+
+.signOut {
+  display: flex;
+  padding-left: 5%;
+  justify-content: flex-end;
+  text-decoration: wrap;
+  white-space: nowrap;
+}
+.sign-up-nav {
+  display: flex;
+  margin-right: 10px;
+
+ 
+}
+.welcome-nav {
+  white-space: nowrap;
+  
+}
+
+
+
+.welcome{
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+align-content: center;
+  font-size: 20px;
+  color: white;
+  font-weight: bold;
+  
+}
+.sign-up-nav, .sign-in-nav {
+  display: flex;
+  width: 100px;
+  background-color: #6634dd;
+  color: white;
+  padding: 10px 20px;
+  margin: 10px;
+  text-align: center;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  padding-left: 50px;
+  margin-left: 1100px;
+}
+
+.sign-up-nav:hover, .sign-in-nav:hover {
+  background-color: #0056b3;
+}
+.signInOut {
+  display: flex;
+  justify-content: flex-end;
+}
+
+
+.sign-up-in-form-container {
+  height: 86.5vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* background-image: url('./proseed.png'); */
+  background-size: 300px;
+  /* background-color: #2d2868f3; */
+  background-repeat: no-repeat;
+  
+  font-family: 'Roboto', sans-serif;
+  padding: 50px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+} 
+
+
+.sign-up-in-form-container form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 10px;
+  font-weight: bold;
+}
+.sign-up-in-form-container input {
+  flex: 1;
+  padding: 5px;
+}
+.sign-up-in-form-container button {
+  
+    background-color: #fff;
+    border: 1px solid #d5d9d9;
+    border-radius: 8px;
+    box-shadow: rgba(213, 217, 217, .5) 0 2px 5px 0;
+    box-sizing: border-box;
+    color: #0f1111;
+    cursor: pointer;
+    display: inline-block;
+    font-family: "Amazon Ember",sans-serif;
+    font-size: 13px;
+    line-height: 29px;
+    padding: 0 10px 0 11px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: middle;
+    width: 100px;
+    background-color: #f7fafa;
+    border-color: #008296;
+    box-shadow: rgba(213, 217, 217, .5) 0 2px 5px 0;
+    outline: 0;
+    font-weight: bold;
+    margin-left: 30px;
+  
+}
+.sign-up-in-box {
+  background-color:white;
+  height: 60vh;
+  width: 45vh;
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  font-size: medium;
+  border-radius: 30px;
+  border: 1px solid black;
+
+  
+}
+.form-container {
+  background-color: white;
+  padding: 50px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
