@@ -29,7 +29,7 @@ const modalOverlayStyle = {
 
 const EventEditModal = ({ closeModal, existingEventData, onEventUpdated }) => {
   const [eventData, setEventData] = useState(existingEventData);
-
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   useEffect(() => {
     setEventData(existingEventData); // Initialize form with existing event data
   }, [existingEventData]);
@@ -43,9 +43,14 @@ const EventEditModal = ({ closeModal, existingEventData, onEventUpdated }) => {
     event.preventDefault();
     // Logic to update the event
     const updatedEvent = await updateEvent(eventData._id, eventData);
+    setShowSuccessMessage(true);
     console.log('Event updated:', updatedEvent);
     onEventUpdated(updatedEvent);
-    closeModal();
+    setTimeout(() => {
+      closeModal();
+      setShowSuccessMessage(false);
+      window.location.reload();  // Reset the success message state
+    }, 1000);
   };
 
   return (
@@ -77,7 +82,9 @@ const EventEditModal = ({ closeModal, existingEventData, onEventUpdated }) => {
             onChange={handleChange}
             placeholder="Location"
           />
+          {showSuccessMessage && <p>Event updated successfully!</p>}
           <button type="submit">Update</button>
+
           <button onClick={closeModal}>Cancel</button>
         </form>
       </div>

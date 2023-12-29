@@ -39,7 +39,7 @@
 
 
 
-/* CSS */
+/* CSS for welcome page and for NAV bar */
 .SignIn-Up-button {
   align-items: center;
   background-color: #FFFFFF;
@@ -112,15 +112,23 @@
 }
 .welcome-nav {
   white-space: nowrap;
+ 
+}
+.page-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: rgb(255, 255, 255);
+  font-family: 'Comme', sans-serif;
+  padding: 10px;
   
 }
-
 
 
 .welcome{
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
+  justify-content: center;
 align-content: center;
   font-size: 20px;
   color: white;
@@ -231,3 +239,340 @@ align-content: center;
   border-radius: 10px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
+
+/* End for welcome and Nav-------- */
+
+/* Create Profile page CSS */
+
+.Create-Profile-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: auto;
+  max-width: 500px; /* Set a max-width for larger screens */
+  border: 1px solid #ddd; /* Border around the form */
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow around the form */
+}
+
+.form-group {
+  display: flex;
+  align-items: center; /* Align label and input in the center */
+  justify-content: space-between; /* Space between label and input */
+  margin-bottom: 1rem; /* Space between form groups */
+  width: 100%; /* Full width */
+}
+
+.form-group label {
+  min-width: 120px; /* Minimum width for labels */
+}
+
+.form-group textarea {
+  min-height: 180px; /* Set a larger minimum height */
+  width: calc(100% - 100px); /* Adjust width considering the label width and margin */
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-left: 0.5rem; /* Space between label and textarea */
+  resize: vertical; /* Allow only vertical resizing */
+}
+
+input[type="text"],
+input[type="date"],
+textarea {
+  width: 85%; /* Full width */
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box; /* Border box sizing */
+}
+
+input[type="text"]:focus,
+input[type="date"]:focus,
+textarea:focus {
+  outline: none;
+  border-color: #84a9ac; /* Highlight color when focused */
+  box-shadow: 0 0 0 2px rgba(132, 169, 172, 0.2);
+}
+
+textarea {
+  resize: vertical; /* Allow vertical resize only */
+  min-height: 100px; /* Minimum height */
+}
+
+/* CSS */
+.create-profile-button {
+  align-items: center;
+  background-color: #FFFFFF;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: .25rem;
+  box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+  box-sizing: border-box;
+  color: rgba(0, 0, 0, 0.85);
+  cursor: pointer;
+  display: inline-flex;
+  font-family: system-ui,-apple-system,system-ui,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  justify-content: center;
+  line-height: 1.25;
+  margin: 0;
+  min-height: 3rem;
+  padding: calc(.875rem - 1px) calc(1.5rem - 1px);
+  position: relative;
+  text-decoration: none;
+  /* transition: all 250ms; */
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+  width: auto;
+}
+
+.create-profile-button:hover,
+.create-profile-button:focus {
+  border-color: rgba(0, 0, 0, 0.15);
+  box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+  color: rgba(0, 0, 0, 0.65);
+}
+
+.create-profile-button:hover {
+  transform: translateY(-1px);
+}
+
+.create-profile-button:active {
+  background-color: #F0F0F1;
+  border-color: rgba(0, 0, 0, 0.15);
+  box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
+  color: rgba(0, 0, 0, 0.65);
+  transform: translateY(0);
+}
+
+
+/* End for Create Profile page CSS */
+
+/* CSS for Profile page */
+
+.profile-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Responsive grid */
+  gap: 2rem; /* Increased space between items */
+  padding: 1rem;
+  margin-top: 3.5rem; /* Space from the top elements */
+}
+.profile-name {
+  font-size: 1.05rem; /* Larger font size */
+  text-decoration: underline; /* Underline the text */
+  cursor: pointer; /* Pointer on hover */
+  text-align: center; /* Center text */
+  font-family: 'Open Sans', sans-serif; /* Stylish font */
+  transition: transform 0.3s ease; /* Smooth transition for hover effect */
+}
+.profile-name:hover {
+  transform: translateY(-5px); /* Slight move upwards on hover */
+}
+
+/* Import the font from Google Fonts or include it in your project */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap');
+
+/* Button styles */
+.create-event {
+  font-size: 1.2rem;
+  padding: 10px 20px;
+  margin: 1rem 0;
+  background-color: #4CAF50; /* A nice green color */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.create-event:hover {
+  background-color: #45a049;
+}
+
+/* General page styling */
+.dion-screen {
+  text-align: center;
+  font-size: 2rem;
+  margin-top: 1rem;
+}
+
+.dion-description h2,
+.dion-description h3 {
+  text-align: center;
+  margin: 1rem;
+}
+
+.Allusers{
+  margin-top: 4rem;
+}
+/* Profile Css */
+
+/* Profile Css */
+
+/* .profile-page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+} */
+
+.profile-info {
+  background-color: #fff; /* White background */
+  border: 1px solid #ddd; /* Light gray border */
+  padding: 15px; /* Padding inside the box */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Subtle shadow for depth */
+  width: 450px; /* You can adjust this width as needed */
+  margin-bottom: 20px; /* Space below the box */
+  display: flex; /* Flex layout */
+  flex-direction: column; /* Stack items vertically */
+  align-items: center; 
+  margin-left: 20px;
+}
+
+.profile-img {
+  width: 100px; /* Adjust as needed */
+  height: 100px; /* Adjust as needed */
+  border-radius: 50%; /* Circular image */
+  margin-bottom: 15px; /* Space below the image */
+}
+
+/* Additional styling if needed */
+h2, p {
+  margin: 5px 0; /* Vertical margin for text elements */
+  text-align: center; /* Center-align text */
+}
+
+.modal-createevent {
+  margin-top: 10px;
+}
+
+.events-section {
+  display: flex; /* Using flex instead of grid */
+  /* flex-direction: row; */
+  flex-wrap: wrap; 
+  gap: 20px; /* Space between cards */
+  justify-content: center; /* Center align the cards */
+}
+
+.event-card {
+   /* display: flex; */
+  /* flex-direction: column;  */
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  width: 250px;
+  margin-bottom: 10px;
+  margin-left: 10px; 
+}
+
+.event-actions {
+  display: flex;
+  
+  justify-content: space-between;
+  /* margin-top: 10px; */
+}
+
+
+/* End for Profile page CSS */
+
+/* createvent modal css */
+
+.modal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.modal form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+}
+
+.modal input,
+.modal textarea {
+  width: 85%;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.modal textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.modal input[type="datetime-local"] {
+  padding: 0.5rem;
+}
+
+.modal input:focus,
+.modal textarea:focus {
+  outline: none;
+  border-color: #84a9ac;
+  box-shadow: 0 0 0 2px rgba(132, 169, 172, 0.2);
+}
+
+.modal button {
+  align-items: center;
+  background-color: #FFFFFF;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: .25rem;
+  box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+  color: rgba(0, 0, 0, 0.85);
+  cursor: pointer;
+  display: inline-flex;
+  font-size: 16px;
+  font-weight: 600;
+  justify-content: center;
+  line-height: 1.25;
+  padding: calc(.875rem - 1px) calc(1.5rem - 1px);
+  vertical-align: baseline;
+  width: auto;
+  margin-top: 1rem;
+}
+
+.modal button:hover,
+.modal button:focus {
+  border-color: rgba(0, 0, 0, 0.15);
+  box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+}
+
+.modal button:active {
+  background-color: #F0F0F1;
+  box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+
+
+
+
+

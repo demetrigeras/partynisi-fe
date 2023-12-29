@@ -15,8 +15,6 @@ const Profilehp = ({ user }) => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [selectedEventForEdit, setSelectedEventForEdit] = useState(null);
 
-
-
   const { userId } = useParams();
 
   useEffect(() => {
@@ -91,7 +89,6 @@ const Profilehp = ({ user }) => {
       setEvents([...events, updatedEvent]);
     }
   };
- 
 
   const handleDeleteEvent = async (eventId) => {
     try {
@@ -107,68 +104,72 @@ const Profilehp = ({ user }) => {
     setSelectedEventForEdit(eventData);
     setIsEditModalOpen(true);
   };
-
   return (
     <>
       <Nav user={user} />
       <h1>Profile Page</h1>
-      {profile ? (
-        <div>
-          <div>
-            <h2>{profile.profilename}</h2>
-            <p>Date of Birth: {new Date(profile.dob).toLocaleDateString()}</p>
-            <p>Bio: {profile.bio}</p>
-            <img src={profile.photo} alt={profile.profilename || "Profile"} />
+    
+        {profile ? (
+         
+         <div className="profile-page-container">
+         <div className='profile-section'>
+           <div className='profile-info'>
+              <img src={profile.photo} alt={profile.profilename || "Profile"} className="profile-img" />
+              <h2>User Name: {profile.profilename}</h2>
+              <p><strong>Date of Birth:</strong> {new Date(profile.dob).toLocaleDateString()}</p>
+              <p><strong>Bio:</strong> {profile.bio}</p>
+            </div>
+            
+            {user.id === profile.user && (
+          <div className="modal-createevent">
+            <button className="create-event" onClick={handleOpenModal}>Create Event</button>
+            {isModalOpen && (
+              <EventCreationModal
+                closeModal={() => setIsModalOpen(false)}
+                isEditMode={Boolean(currentEvent)}
+                existingEventData={currentEvent}
+                userId={user.id}
+              />
+            )}
           </div>
+        )}
+      </div> {/* Closing profile-section */}
 
-          <div>
-            {events.map((event) => (
-              <div key={event._id}>
-                <p>Title: {event.title}</p>
-                <p>Description: {event.description}</p>
-
-                {user.id === profile.user && ( // Show CRUD buttons only for logged-in user's profile
-                  <div>
-                   <button onClick={() => handleOpenEditModal(event)}>
-                      Edit Event
-                    </button>
-                    <button onClick={() => handleDeleteEvent(event._id)}>
-                      Delete Event
-                    </button>
-                  </div>
-                )}
-              </div>
-            ))}
-            {isEditModalOpen && (
-      <EventEditModal
-        closeModal={() => setIsEditModalOpen(false)}
-        existingEventData={selectedEventForEdit}
-        onEventUpdated={handleEventUpdated}
-      />
-    )}
-          </div>
-
-
-          {user.id === profile.user && ( // Show create event button only for logged-in user's profile
-            <div className="modal-createevent">
-              <button className="create-event" onClick={handleOpenModal}>
-                Create Event
-              </button>
-              {isModalOpen && (
-                <EventCreationModal
-                  closeModal={() => setIsModalOpen(false)}
-                  isEditMode={Boolean(currentEvent)}
-                  existingEventData={currentEvent}
-                  userId={user.id}
-                  // onEventUpdated={handleEventUpdated}
+            <div className="events-section">
+              {events.map((event) => (
+                <div key={event._id} className="event-card">
+                  <p><strong>Title:</strong> {event.title}</p>
+                  <p><strong>Description:</strong> {event.description}</p>
+                  <p><strong>Location:</strong> {event.location}</p>
+                  <p><strong>Date:</strong> {new Date(event.dateTime).toLocaleDateString()}</p>
+                  {user.id === profile.user && (
+                    <div className="event-actions">
+                      <button onClick={() => handleOpenEditModal(event)}>
+                        Edit Event
+                      </button>
+                      <button onClick={() => handleDeleteEvent(event._id)}>
+                        Delete Event
+                      </button>
+                    </div>
+                  )}
+                </div>
+                
+              ))}
+              {isEditModalOpen && (
+                <EventEditModal
+                  closeModal={() => setIsEditModalOpen(false)}
+                  existingEventData={selectedEventForEdit}
+                  onEventUpdated={handleEventUpdated}
                 />
               )}
             </div>
-          )}
-        </div>
-      ) : (
-        <p>Loading profile...</p>
-      )}
+            </div>
+            
+        
+        ) : (
+          <p>Loading profile...</p>
+        )}
+  
     </>
   );
 };

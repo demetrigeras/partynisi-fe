@@ -40,10 +40,7 @@ const Dionhp = ({ user }) => {
       <Nav user={user} />
       <div className="dion-screen">Welcome to Dion!</div>
       <div className="dion-description">
-        <h2>
-          Dion is a Party Scheduling app where you can create events and request
-          to be a part of events
-        </h2>
+       
         <h3>
           Click on the create event button to Create Event on your Profile
         </h3>
@@ -54,20 +51,21 @@ const Dionhp = ({ user }) => {
           Create Event
         </button>
         <div className="Allusers">
-          <strong>See all other users displayed below:</strong>
-          <ul>
+          <strong>Click below on other users profiles to see what events they have listed:</strong>
+       </div>
+<div className="profile-container">
             {profiles.map((profile) => (
-              <li
+                <div className="profile-name"
                 key={profile._id}
                 onClick={() => navigate(`/profile/${profile.user}`)}
-              >
+                >
                 {profile.profilename}
-              </li>
+                </div>  
             ))}
-          </ul>
+          </div>
         </div>
       </div>
-    </div>
+    
   );
 };
 

@@ -66,8 +66,10 @@ const CreateProfile = ({ user }) => {
     <div>
       <Nav user={user} />
       <h1>Create Profile</h1>
+      <div className="Create-Profile-form">
       <form onSubmit={handleSubmit}>
-        <div>
+        <div className="label-formss">
+        <div className="form-group">
           <label>Profile Name:</label>
           <input
             type="text"
@@ -76,7 +78,7 @@ const CreateProfile = ({ user }) => {
             onChange={handleChange}
           />
         </div>
-        <div>
+        <div className="form-group">
           <label>Date of Birth:</label>
           <input
             type="date"
@@ -85,7 +87,7 @@ const CreateProfile = ({ user }) => {
             onChange={handleChange}
           />
         </div>
-        <div>
+        <div className="form-group">
           <label>Bio:</label>
           <textarea
             name="bio"
@@ -93,7 +95,7 @@ const CreateProfile = ({ user }) => {
             onChange={handleChange}
           />
         </div>
-        <div>
+        <div className="form-group">
           <label>Photo URL:</label>
           <input
             type="text"
@@ -102,8 +104,13 @@ const CreateProfile = ({ user }) => {
             onChange={handleChange}
           />
         </div>
-        <button type="submit">Create Profile</button>
+        <div className="create-profile-buttons">
+        <button className="create-profile-button" type="submit">Create Profile</button>
+        </div>
+        </div> 
       </form>
+    
+      </div>
     </div>
   );
 };
