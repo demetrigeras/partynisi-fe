@@ -30,8 +30,8 @@ const Home = () => {
       <div className='welcome-overlay'>
       <h1>Welcome to Dion</h1>
       <div className='SignupIntro'>
-    <h2>Dion is a Party Scheduling App</h2>
-        <h3>Sign up and create an account or Sign In to create and view other events</h3>
+    <h2>Dion is a Party Scheduling App where you can create and view other hosts events</h2>
+        
       </div>
       </div>
 

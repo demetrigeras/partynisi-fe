@@ -129,7 +129,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-align-content: center;
+  align-content: center;
   font-size: 20px;
   color: white;
   font-weight: bold;
@@ -281,11 +281,11 @@ align-content: center;
 input[type="text"],
 input[type="date"],
 textarea {
-  width: 85%; /* Full width */
-  padding: 0.5rem;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  box-sizing: border-box; /* Border box sizing */
+   width: 85%;  
+   padding: 0.5rem; 
+  border: 1px solid #ddd; 
+  border-radius: 4px; 
+  box-sizing: border-box; 
 }
 
 input[type="text"]:focus,
@@ -353,6 +353,19 @@ textarea {
 /* End for Create Profile page CSS */
 
 /* CSS for Profile page */
+.partyhp{
+  background-color: rgb(195, 255, 192);
+}
+.dion-screen{
+  color: rgb(21, 10, 10);
+ 
+  
+}
+
+.dion-description{
+  color: rgb(7, 2, 2);
+  
+}
 
 .profile-container {
   display: grid;
@@ -360,6 +373,7 @@ textarea {
   gap: 2rem; /* Increased space between items */
   padding: 1rem;
   margin-top: 3.5rem; /* Space from the top elements */
+
 }
 .profile-name {
   font-size: 1.05rem; /* Larger font size */
@@ -368,6 +382,8 @@ textarea {
   text-align: center; /* Center text */
   font-family: 'Open Sans', sans-serif; /* Stylish font */
   transition: transform 0.3s ease; /* Smooth transition for hover effect */
+  /* color: white; */
+  color: white
 }
 .profile-name:hover {
   transform: translateY(-5px); /* Slight move upwards on hover */
@@ -472,15 +488,74 @@ h2, p {
 
 .event-actions {
   display: flex;
-  
   justify-content: space-between;
   /* margin-top: 10px; */
 }
 
+.editmodal-deletebutton{
+
+  appearance: none;
+  background-color: #FAFBFC;
+  border: 1px solid rgba(27, 31, 35, 0.15);
+  border-radius: 6px;
+  box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0, rgba(255, 255, 255, 0.25) 0 1px 0 inset;
+  box-sizing: border-box;
+  color: #24292E;
+  cursor: pointer;
+  display: inline-block;
+  font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  list-style: none;
+  padding: 6px 16px;
+  position: relative;
+  transition: background-color 0.2s cubic-bezier(0.3, 0, 0.5, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+  white-space: nowrap;
+  word-wrap: break-word;
+}
+
+.button-4:hover {
+  background-color: #F3F4F6;
+  text-decoration: none;
+  transition-duration: 0.1s;
+}
+
+.button-4:disabled {
+  background-color: #FAFBFC;
+  border-color: rgba(27, 31, 35, 0.15);
+  color: #959DA5;
+  cursor: default;
+}
+
+.button-4:active {
+  background-color: #EDEFF2;
+  box-shadow: rgba(225, 228, 232, 0.2) 0 1px 0 inset;
+  transition: none 0s;
+}
+
+.button-4:focus {
+  outline: 1px transparent;
+}
+
+.button-4:before {
+  display: none;
+}
+
+.button-4:-webkit-details-marker {
+  display: none;
+}
+
+
+
 
 /* End for Profile page CSS */
 
-/* createvent modal css */
+/* createvent/edit modal css */
 
 .modal {
   display: flex;
@@ -567,6 +642,18 @@ h2, p {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.button-container {
+  display: flex;            /* Use flexbox layout */
+  justify-content: center;  /* Center the buttons horizontally */
+  gap: 10px;                /* Add some space between the buttons */
+}
+
+.createEditEventbuttonmodal,
+.cancelbutton {
+  padding: 10px 20px;       /* Add padding for better appearance */
+  /* You can add more styling like border, background-color, etc. */
 }
 
 

@@ -83,9 +83,10 @@ const EventEditModal = ({ closeModal, existingEventData, onEventUpdated }) => {
             placeholder="Location"
           />
           {showSuccessMessage && <p>Event updated successfully!</p>}
-          <button type="submit">Update</button>
-
-          <button onClick={closeModal}>Cancel</button>
+          <div className="button-container">
+          <button className='createEditEventbuttonmodal' type="submit">Update</button>
+          <button className='cancelbutton' onClick={closeModal}>Cancel</button>
+          </div>
         </form>
       </div>
     </div>

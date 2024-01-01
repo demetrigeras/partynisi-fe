@@ -1,7 +1,7 @@
 import { React, useState } from 'react'
 import { signIn } from '../services/user.js'
 import { useNavigate } from 'react-router-dom'
-
+import cartoonpartimg from "./cartooparty.jpeg"
 const SignIn = (props) => {
   const navigate = useNavigate()
 
@@ -54,6 +54,17 @@ const SignIn = (props) => {
   const { email, password } = form
 
   return (
+    <div className='signUp/In image' style={{ 
+      backgroundImage: `url(${cartoonpartimg })`,
+      backgroundSize: 'cover', // Cover the entire space of the div
+      backgroundPosition: 'center', // Center the image
+      backgroundRepeat: 'no-repeat', // Do not repeat the image
+      width: '100vw', // Set width to full viewport width
+      height: '100vh', // Set height to full viewport height
+      position: 'absolute', // Position it over the whole screen
+      top: '0',
+      left: '0',
+      overflow: 'hidden'}}>
     <div className='sign-up-in-form-container'>
       <div className='sign-up-in-box'>
       <h3>Sign In</h3>
@@ -62,7 +73,7 @@ const SignIn = (props) => {
         
         <input
           required
-          type='text'
+          type='email'
           name='email'
           value={email}
           placeholder='Enter Email'
@@ -84,6 +95,7 @@ const SignIn = (props) => {
       
       </div>
       
+    </div>
     </div>
   )
 }

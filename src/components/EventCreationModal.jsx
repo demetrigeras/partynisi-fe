@@ -124,9 +124,11 @@ const handleSubmit = async (event) => {
         <input name="dateTime" type="datetime-local" value={eventData.dateTime} onChange={handleChange} />
         <input name="location" value={eventData.location} onChange={handleChange} placeholder="Location" />
         {showSuccessMessage && <p>Event {isEditMode ? 'Updated' : 'Created'} Successfully!</p>}
-        <button type="submit">{isEditMode ? 'Edit' : 'Create'}</button>
+        <div className="button-container">
+        <button className='createEditEventbuttonmodal' type="submit">{isEditMode ? 'Edit' : 'Create'}</button>
         {/* <button type="submit">Create</button> */}
-        <button onClick={closeModal}>Cancel</button>
+        <button className='cancelbutton' onClick={closeModal}>Cancel</button>
+        </div> 
       </form>
     </div>
     </div>

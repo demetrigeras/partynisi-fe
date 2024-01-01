@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Nav from "../components/Nav";
 import { getProfile } from "../services/profile.js";
-import EventCreationModal from "../components/EventCreationModal.jsx"; // Adjust the import path as needed
+import EventCreationModal from "../components/EventCreationModal.jsx"; 
 import { getEventsByUser, deleteEvent } from "../services/event.js";
-import EventEditModal from "../components/EventEditModal.jsx"; // Adjust the import path as needed
+import EventEditModal from "../components/EventEditModal.jsx"; 
+import confetti from "./confetti.jpeg"
 
 const Profilehp = ({ user }) => {
   const [profile, setProfile] = useState(null);
@@ -105,12 +106,12 @@ const Profilehp = ({ user }) => {
     setIsEditModalOpen(true);
   };
   return (
-    <>
+    <div>
       <Nav user={user} />
       <h1>Profile Page</h1>
     
         {profile ? (
-         
+        
          <div className="profile-page-container">
          <div className='profile-section'>
            <div className='profile-info'>
@@ -141,13 +142,14 @@ const Profilehp = ({ user }) => {
                   <p><strong>Title:</strong> {event.title}</p>
                   <p><strong>Description:</strong> {event.description}</p>
                   <p><strong>Location:</strong> {event.location}</p>
-                  <p><strong>Date:</strong> {new Date(event.dateTime).toLocaleDateString()}</p>
+                  <p><strong>Date and Time:</strong> {new Date(event.dateTime).toLocaleString()}</p>
+
                   {user.id === profile.user && (
                     <div className="event-actions">
-                      <button onClick={() => handleOpenEditModal(event)}>
+                      <button className="editmodal-deletebutton" onClick={() => handleOpenEditModal(event)}>
                         Edit Event
                       </button>
-                      <button onClick={() => handleDeleteEvent(event._id)}>
+                      <button className="editmodal-deletebutton" onClick={() => handleDeleteEvent(event._id)}>
                         Delete Event
                       </button>
                     </div>
@@ -170,7 +172,7 @@ const Profilehp = ({ user }) => {
           <p>Loading profile...</p>
         )}
   
-    </>
+    </div>
   );
 };
 
