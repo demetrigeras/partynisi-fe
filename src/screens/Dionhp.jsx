@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { getProfiles, getProfile } from "../services/profile.js";
 import crowd from "./ballons.jpeg"
+
 const Dionhp = ({ user }) => {
   const navigate = useNavigate();
   const { userId } = useParams();
@@ -41,7 +42,7 @@ const Dionhp = ({ user }) => {
       <div className="dion-screen" >Welcome to Dion!</div>
       <div className="dion-description">
         <h3>
-          Go to your profile to create an event on your Profile page 
+          Go to your profile to create an event on your profile page 
         </h3>
         <button
           className="create-event"

@@ -115,9 +115,9 @@ const Profilehp = ({ user }) => {
   };
 
   return (
-    <div>
+    <div className="profilepage">
       <Nav user={user} />
-      <h1>Profile Page</h1>
+      
 
 {profile ? (
   <div className="profile-page-container">
@@ -147,10 +147,12 @@ const Profilehp = ({ user }) => {
   <div className="events-section">
     {events.map((event) => (
       <div key={event._id} className="event-card">
-        <p><strong>Title:</strong> {event.title}</p>
-        <p><strong>Description:</strong> {event.description}</p>
-        <p><strong>Location:</strong> {event.location}</p>
-        <p><strong>Date and Time:</strong>{" "} {new Date(event.dateTime).toLocaleString()}</p>
+      <div className="event-details">
+      <p><strong>Title:</strong> {event.title}</p>
+      <p><strong>Description:</strong>{event.description}</p>
+      <p><strong>Location:</strong> {event.location}</p>
+      <p><strong>Date and Time:</strong> {new Date(event.dateTime).toLocaleString()}</p>
+    </div>
       {user.id === profile.user && (
         <div className="event-actions">
           <button
@@ -166,11 +168,11 @@ const Profilehp = ({ user }) => {
         </div>
       
       )}
-        {user.id !== profile.user && (
+        {/* {user.id !== profile.user && (
         <button className="request-attend-button"onClick={() => handleRequestToAttend(event._id)}>
           Request to Attend
         </button>
-      )}
+      )} */}
     </div>
   ))} 
 </div> 

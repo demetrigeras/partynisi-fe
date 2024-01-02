@@ -17,7 +17,9 @@ Create Profile Page: This is where you will make your profile. You will need to 
 
 Home Page: This is where all there profiles are display where you can click on another users profile to see other events. The Profile button will take you to your profile page.
 
-Profile Page: This is where you will be able to create an event, edit event or delete an event.
+Profile Page: This is where you will be able to create an event, edit event or delete an event. It will also show existing events that you have previous created.
+
+
 
 
 
