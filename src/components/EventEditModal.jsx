@@ -21,9 +21,9 @@ const modalOverlayStyle = {
     padding: '20px',
     borderRadius: '5px',
     boxShadow: '0 2px 10px rgba(0, 0, 0, 0.3)',
-    width: '70%',  // Adjust width as needed
-    height: '80%', // Adjust height as needed
-    overflow: 'auto', // Add scrollbars if content overflows
+    width: '70%',  
+    height: '70%', 
+    overflow: 'auto', 
   };
 
 
@@ -31,7 +31,7 @@ const EventEditModal = ({ closeModal, existingEventData, onEventUpdated }) => {
   const [eventData, setEventData] = useState(existingEventData);
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   useEffect(() => {
-    setEventData(existingEventData); // Initialize form with existing event data
+    setEventData(existingEventData); 
   }, [existingEventData]);
 
   const handleChange = (event) => {
@@ -49,7 +49,7 @@ const EventEditModal = ({ closeModal, existingEventData, onEventUpdated }) => {
     setTimeout(() => {
       closeModal();
       setShowSuccessMessage(false);
-      window.location.reload();  // Reset the success message state
+      window.location.reload();  
     }, 1000);
   };
 

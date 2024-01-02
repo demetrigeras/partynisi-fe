@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Nav from "../components/Nav";
 import { getProfile } from "../services/profile.js";
-import EventCreationModal from "../components/EventCreationModal.jsx"; 
+import EventCreationModal from "../components/EventCreationModal.jsx";
 import { getEventsByUser, deleteEvent } from "../services/event.js";
-import EventEditModal from "../components/EventEditModal.jsx"; 
-import confetti from "./confetti.jpeg"
+import EventEditModal from "../components/EventEditModal.jsx";
+import { createAttendace } from "../services/attendance.js";
 
 const Profilehp = ({ user }) => {
   const [profile, setProfile] = useState(null);
@@ -27,22 +27,20 @@ const Profilehp = ({ user }) => {
         console.error("Error fetching profile:", error);
       }
     };
-
     fetchProfileData();
   }, [userId]);
+
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
   };
 
+
   useEffect(() => {
-    // Fetch the profile based on the URL parameter userId
     const fetchProfileData = async () => {
       try {
         const fetchedProfile = await getProfile(userId);
         setProfile(fetchedProfile);
-
-        // Fetch events for the profile being viewed
         const profileEvents = await getEventsByUser(fetchedProfile.user);
         setEvents(profileEvents);
       } catch (error) {
@@ -79,14 +77,12 @@ const Profilehp = ({ user }) => {
 
   const handleEventUpdated = (updatedEvent) => {
     if (isEditMode) {
-      // Replace the event in the list with the updated one
       setEvents(
         events.map((event) =>
           event._id === updatedEvent._id ? updatedEvent : event
         )
       );
     } else {
-      // Add the new event to the list
       setEvents([...events, updatedEvent]);
     }
   };
@@ -94,7 +90,6 @@ const Profilehp = ({ user }) => {
   const handleDeleteEvent = async (eventId) => {
     try {
       await deleteEvent(eventId);
-      // Remove the event from the local state to update the UI
       setEvents(events.filter((event) => event._id !== eventId));
       console.log("Event deleted");
     } catch (error) {
@@ -105,73 +100,93 @@ const Profilehp = ({ user }) => {
     setSelectedEventForEdit(eventData);
     setIsEditModalOpen(true);
   };
+
+  const handleRequestToAttend = async (eventId) => {
+    try {
+      const requestData = {
+        event: eventId,
+        user: user.id, 
+        status: "pending",
+      };
+      await createAttendace(requestData);
+    } catch (error) {
+      console.error("Error requesting to attend:", error);
+    }
+  };
+
   return (
     <div>
       <Nav user={user} />
       <h1>Profile Page</h1>
-    
-        {profile ? (
-        
-         <div className="profile-page-container">
-         <div className='profile-section'>
-           <div className='profile-info'>
-              <img src={profile.photo} alt={profile.profilename || "Profile"} className="profile-img" />
-              <h2>User Name: {profile.profilename}</h2>
-              <p><strong>Date of Birth:</strong> {new Date(profile.dob).toLocaleDateString()}</p>
-              <p><strong>Bio:</strong> {profile.bio}</p>
-            </div>
-            
-            {user.id === profile.user && (
-          <div className="modal-createevent">
-            <button className="create-event" onClick={handleOpenModal}>Create Event</button>
-            {isModalOpen && (
-              <EventCreationModal
-                closeModal={() => setIsModalOpen(false)}
-                isEditMode={Boolean(currentEvent)}
-                existingEventData={currentEvent}
-                userId={user.id}
+
+{profile ? (
+  <div className="profile-page-container">
+    <div className="profile-section">
+      <div className="profile-info">
+        <img src={profile.photo}alt={profile.profilename || "Profile"} className="profile-img"/>
+        <h2>User Name: {profile.profilename}</h2>
+        <p><strong>Date of Birth:</strong>{" "}{new Date(profile.dob).toLocaleDateString()}</p>
+        <p><strong>Bio:</strong> {profile.bio} </p>
+      </div>
+
+    {user.id === profile.user && (
+      <div className="modal-createevent">
+        <button className="create-event" onClick={handleOpenModal}> Create Event</button>
+        {isModalOpen && (
+          <EventCreationModal
+            closeModal={() => setIsModalOpen(false)}
+            isEditMode={Boolean(currentEvent)}
+            existingEventData={currentEvent}
+            userId={user.id}
+          />
+        )}
+      </div>
+    )}
+  </div>{" "}
+ 
+  <div className="events-section">
+    {events.map((event) => (
+      <div key={event._id} className="event-card">
+        <p><strong>Title:</strong> {event.title}</p>
+        <p><strong>Description:</strong> {event.description}</p>
+        <p><strong>Location:</strong> {event.location}</p>
+        <p><strong>Date and Time:</strong>{" "} {new Date(event.dateTime).toLocaleString()}</p>
+      {user.id === profile.user && (
+        <div className="event-actions">
+          <button
+            className="editmodal-deletebutton"
+            onClick={() => handleOpenEditModal(event)}>
+            Edit Event
+          </button>
+          <button
+            className="editmodal-deletebutton"
+            onClick={() => handleDeleteEvent(event._id)}>
+            Delete Event
+          </button>
+        </div>
+      
+      )}
+        {user.id !== profile.user && (
+        <button className="request-attend-button"onClick={() => handleRequestToAttend(event._id)}>
+          Request to Attend
+        </button>
+      )}
+    </div>
+  ))} 
+</div> 
+
+            {isEditModalOpen && (
+              <EventEditModal
+                closeModal={() => setIsEditModalOpen(false)}
+                existingEventData={selectedEventForEdit}
+                onEventUpdated={handleEventUpdated}
               />
             )}
           </div>
-        )}
-      </div> {/* Closing profile-section */}
-
-            <div className="events-section">
-              {events.map((event) => (
-                <div key={event._id} className="event-card">
-                  <p><strong>Title:</strong> {event.title}</p>
-                  <p><strong>Description:</strong> {event.description}</p>
-                  <p><strong>Location:</strong> {event.location}</p>
-                  <p><strong>Date and Time:</strong> {new Date(event.dateTime).toLocaleString()}</p>
-
-                  {user.id === profile.user && (
-                    <div className="event-actions">
-                      <button className="editmodal-deletebutton" onClick={() => handleOpenEditModal(event)}>
-                        Edit Event
-                      </button>
-                      <button className="editmodal-deletebutton" onClick={() => handleDeleteEvent(event._id)}>
-                        Delete Event
-                      </button>
-                    </div>
-                  )}
-                </div>
-                
-              ))}
-              {isEditModalOpen && (
-                <EventEditModal
-                  closeModal={() => setIsEditModalOpen(false)}
-                  existingEventData={selectedEventForEdit}
-                  onEventUpdated={handleEventUpdated}
-                />
-              )}
-            </div>
-            </div>
-            
-        
-        ) : (
-          <p>Loading profile...</p>
-        )}
-  
+        // </div>
+      ) : (
+        <p>Loading profile...</p>
+      )}
     </div>
   );
 };

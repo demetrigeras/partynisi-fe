@@ -3,7 +3,7 @@ import Nav from "../components/Nav.jsx";
 import { useNavigate } from "react-router-dom";
 import { createProfile} from "../services/profile.js";
 // import { getEventsByUser } from "../services/event.js";
-
+import partyhpimg from "./cartooparty.jpeg"
 
 const CreateProfile = ({ user }) => {
   const navigate = useNavigate();
@@ -14,25 +14,15 @@ const CreateProfile = ({ user }) => {
     bio: "",
     photo: "",
   });
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
   useEffect(() => {
-    // Set user ID when the component mounts and the user prop is available
     if (user && user.id) {
       setProfileData((prevData) => ({ ...prevData, user: user.id }));
     }
   }, [user]);
 
-  // const [events, setEvents] = useState([]);
-  // const [isModalOpen, setIsModalOpen] = useState(false);
-  // const [currentEvent, setCurrentEvent] = useState(null);
-
-  // const handleEditEvent = (eventData) => {
-  //   setCurrentEvent(eventData);
-  //   setIsModalOpen(true);
-  // };
-
-
-  
+ 
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -46,26 +36,33 @@ const CreateProfile = ({ user }) => {
     event.preventDefault();
     console.log('Submitting profile:', profileData)
     const userProfile = await createProfile(profileData);
-    navigate("/dionhp");
+    setShowSuccessMessage(true);
+    setTimeout(() => {
+      setShowSuccessMessage(false);
+      navigate("/dionhp");
+       
+    }, 1000)
+   
     console.log('Profile created:', userProfile);
-    // Here you would usually send the data to your server
   };
-// const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     // console.log('Submitting profile:', ProfileData);
-//     try {
-//       const userProfile = await createProfile(ProfileData);
-//       console.log('Profile created:', userProfile);
-//       navigate('/dionhp');
-//     } catch (error) {
-//       console.error('Error creating profile:', error);
-//     }
-//   };
 
   return (
+    <div className="createpage"style={{ 
+      backgroundImage: `url(${partyhpimg})`,
+      backgroundSize: 'cover', 
+      backgroundPosition: 'center', 
+      backgroundRepeat: 'no-repeat', 
+      width: '100vw', 
+      height: '100vh', 
+      position: 'absolute',
+      top: '0',
+      left: '0',
+      overflow: 'hidden'
+      }}>
+        
     <div>
-      <Nav user={user} />
-      <h1>Create Profile</h1>
+      {/* <Nav user={user} /> */}
+      <h1 className="createprofileletter" >Create Profile</h1>
       <div className="Create-Profile-form">
       <form onSubmit={handleSubmit}>
         <div className="label-formss">
@@ -103,7 +100,9 @@ const CreateProfile = ({ user }) => {
             value={profileData.photo}
             onChange={handleChange}
           />
+          {showSuccessMessage && <p>Profile Created!</p>}
         </div>
+        
         <div className="create-profile-buttons">
         <button className="create-profile-button" type="submit">Create Profile</button>
         </div>
@@ -111,6 +110,7 @@ const CreateProfile = ({ user }) => {
       </form>
     
       </div>
+    </div>
     </div>
   );
 };

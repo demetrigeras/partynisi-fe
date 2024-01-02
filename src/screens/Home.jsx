@@ -16,16 +16,16 @@ const Home = () => {
   return (
     <div className='welcome' style={{ 
       backgroundImage: `url(${backgroundImage})`,
-      backgroundSize: 'cover', // Cover the entire space of the div
-      backgroundPosition: 'center', // Center the image
-      backgroundRepeat: 'no-repeat', // Do not repeat the image
-      width: '100vw', // Set width to full viewport width
-      height: '100vh', // Set height to full viewport height
-      position: 'absolute', // Position it over the whole screen
+      backgroundSize: 'cover',
+      backgroundPosition: 'center', 
+      backgroundRepeat: 'no-repeat', 
+      width: '100vw', 
+      height: '100vh', 
+      position: 'absolute', 
       top: '0',
       left: '0',
-      overflow: 'hidden' // Hide the overflow
-       // Make it full height of the viewport
+      overflow: 'hidden' 
+       
     }}>
       <div className='welcome-overlay'>
       <h1>Welcome to Dion</h1>

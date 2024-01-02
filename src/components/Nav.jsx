@@ -5,7 +5,6 @@ export default function Nav(props) {
   const { user } = props;
 
   useEffect(() => {
-    // Any logic you want to execute when `user` changes
     console.log("User changed:", user);
   }, [user]);
 
@@ -15,14 +14,9 @@ export default function Nav(props) {
         <div className="home">
           <NavLink to="/dionhp">Home </NavLink>
         </div>
-
-        
           {user ? (
             <>
               <div className="welcomes">Welcome {user.name || ""}</div>
-
-
-              
               <div className="signOut">
                 <NavLink to="/sign-out">Sign Out</NavLink>
               </div>
