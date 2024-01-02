@@ -470,7 +470,8 @@ textarea {
   margin-bottom: 20px; /* Space below the box */
   display: flex; /* Flex layout */
   flex-direction: column; /* Stack items vertically */
-  align-items: center; 
+  align-self: flex-start;
+  align-items: flex-start; 
   margin-left: 20px;
   font-family: 'Open Sans', sans-serif;
   margin-top: 20px;
@@ -505,9 +506,11 @@ h2, p {
   justify-content: center; /* Center align the cards */
 }
 
+
 .event-card {
-   /* display: flex; */
-  /* flex-direction: column;  */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* This will push the actions to the bottom */
   background-color: #fff;
   border: 1px solid #ddd;
   padding: 15px;
@@ -515,8 +518,9 @@ h2, p {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   width: 370px;
   margin-bottom: 10px;
-  margin-left: 10px; 
+  margin-left: 10px;
   font-family: 'Open Sans', sans-serif;
+  height: auto; /* Adjust this as needed */
 }
 
 .event-details {
@@ -528,6 +532,11 @@ h2, p {
   font-family: 'Open Sans', sans-serif;
 }
 
+.event-details p,
+.event-details .event-description {
+  margin: 0;
+  padding: 0;
+}
 
 .event-actions {
   display: flex;

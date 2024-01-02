@@ -6,6 +6,7 @@ import EventCreationModal from "../components/EventCreationModal.jsx";
 import { getEventsByUser, deleteEvent } from "../services/event.js";
 import EventEditModal from "../components/EventEditModal.jsx";
 import { createAttendace } from "../services/attendance.js";
+import spreadballons from "./spreadballons.jpeg"
 
 const Profilehp = ({ user }) => {
   const [profile, setProfile] = useState(null);
@@ -115,7 +116,18 @@ const Profilehp = ({ user }) => {
   };
 
   return (
-    <div className="profilepage">
+    <div className="profilepage" style={{ 
+      backgroundImage: `url(${spreadballons})`,
+      backgroundSize: 'cover', 
+      backgroundPosition: 'center', 
+      backgroundRepeat: 'no-repeat', 
+      width: '100vw', 
+      height: '100vh', 
+      position: 'absolute', 
+      top: '0',
+      left: '0',
+      overflow: 'auto',
+      }}>
       <Nav user={user} />
       
 
@@ -149,7 +161,7 @@ const Profilehp = ({ user }) => {
       <div key={event._id} className="event-card">
       <div className="event-details">
       <p><strong>Title:</strong> {event.title}</p>
-      <p><strong>Description:</strong>{event.description}</p>
+      <p><strong>Description: </strong>{event.description}</p>
       <p><strong>Location:</strong> {event.location}</p>
       <p><strong>Date and Time:</strong> {new Date(event.dateTime).toLocaleString()}</p>
     </div>
