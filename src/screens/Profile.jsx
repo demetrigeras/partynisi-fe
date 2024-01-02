@@ -5,10 +5,12 @@ import { getProfile } from "../services/profile.js";
 import EventCreationModal from "../components/EventCreationModal.jsx";
 import { getEventsByUser, deleteEvent } from "../services/event.js";
 import EventEditModal from "../components/EventEditModal.jsx";
-import { createAttendace } from "../services/attendance.js";
+import { createAttendace, getAttendancesByUser, getAttendanceRequestsForHost } from "../services/attendance.js";
 import spreadballons from "./spreadballons.jpeg"
+import Requests from "../components/Requests.jsx";
 
 const Profilehp = ({ user }) => {
+
   const [profile, setProfile] = useState(null);
   const [events, setEvents] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -16,8 +18,12 @@ const Profilehp = ({ user }) => {
   const [isEditMode, setIsEditMode] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [selectedEventForEdit, setSelectedEventForEdit] = useState(null);
-
+  const [userRequests, setUserRequests] = useState([]);
+  const [hostEventRequests, setHostEventRequests] = useState([]);
   const { userId } = useParams();
+
+
+
 
   useEffect(() => {
     const fetchProfileData = async () => {
@@ -115,6 +121,8 @@ const Profilehp = ({ user }) => {
     }
   };
 
+ 
+
   return (
     <div className="profilepage" style={{ 
       backgroundImage: `url(${spreadballons})`,
@@ -165,6 +173,7 @@ const Profilehp = ({ user }) => {
       <p><strong>Location:</strong> {event.location}</p>
       <p><strong>Date and Time:</strong> {new Date(event.dateTime).toLocaleString()}</p>
     </div>
+   
       {user.id === profile.user && (
         <div className="event-actions">
           <button
@@ -177,16 +186,27 @@ const Profilehp = ({ user }) => {
             onClick={() => handleDeleteEvent(event._id)}>
             Delete Event
           </button>
+          
         </div>
+        
       
       )}
-        {/* {user.id !== profile.user && (
+      
+     
+        {user.id !== profile.user && (
         <button className="request-attend-button"onClick={() => handleRequestToAttend(event._id)}>
           Request to Attend
         </button>
-      )} */}
+      )}
     </div>
+    
   ))} 
+<Requests
+      userId={user.id}
+      userRequests={userRequests}
+      hostEventRequests={hostEventRequests}
+      isCurrentUser={user.id === profile?.user}
+    />
 </div> 
 
             {isEditModalOpen && (

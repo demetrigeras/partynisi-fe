@@ -20,6 +20,28 @@ export const getAttendance = async (id) => {
     }
   };
 
+
+  export const getAttendancesByUser = async (userId) => {
+    try {
+      const response = await api.get(`/attend/user/${userId}`);
+      return response.data;
+    } catch (error) {
+      console.error(`Failed to get attendances by user - error: ${error}`);
+      throw error;
+    }
+  };
+
+  export const getAttendanceRequestsForHost = async (hostId) => {
+    try {
+      const response = await api.get(`/attend/host/${hostId}`);
+      return response.data;
+    } catch (error) {
+      console.error(`Failed to get attendance requests for host - error: ${error}`);
+      throw error;
+    }
+  };
+  
+
 export const createAttendace = async (attend) => {
     try {
       const response = await api.post("/attend", attend);
