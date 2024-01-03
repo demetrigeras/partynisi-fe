@@ -48,7 +48,9 @@ const Profilehp = ({ user }) => {
       try {
         const fetchedProfile = await getProfile(userId);
         setProfile(fetchedProfile);
+        console.log("Profile fetched:", fetchedProfile);
         const profileEvents = await getEventsByUser(fetchedProfile.user);
+        console.log("Events fetched:", profileEvents);
         setEvents(profileEvents);
       } catch (error) {
         console.error("Error fetching profile:", error);
@@ -57,6 +59,24 @@ const Profilehp = ({ user }) => {
 
     fetchProfileData();
   }, [userId]);
+
+  useEffect(() => {
+    const fetchHostEventRequests = async () => {
+        if (profile && profile.user) {
+            try {
+                const hostRequests = await getAttendanceRequestsForHost(profile.user);
+                setHostEventRequests(hostRequests);
+                console.log("Host requests:", hostRequests);
+                console.log("Profile.user:", profile.user);
+            } catch (error) {
+                console.error("Error fetching host event requests:", error);
+            }
+        }
+    };
+    if (profile) {
+        fetchHostEventRequests();
+    }
+}, [profile]);
 
   useEffect(() => {
     const fetchProfileData = async () => {
@@ -116,6 +136,7 @@ const Profilehp = ({ user }) => {
         status: "pending",
       };
       await createAttendace(requestData);
+      console.log("Request sent to attendace:", requestData);
     } catch (error) {
       console.error("Error requesting to attend:", error);
     }
@@ -202,11 +223,13 @@ const Profilehp = ({ user }) => {
     
   ))} 
 <Requests
-      userId={user.id}
-      userRequests={userRequests}
-      hostEventRequests={hostEventRequests}
-      isCurrentUser={user.id === profile?.user}
-    />
+  user={user}
+  userRequests={userRequests}
+  setUserRequests={setUserRequests}
+  hostEventRequests={hostEventRequests}
+  setHostEventRequests={setHostEventRequests}
+  profile={profile} // Ensure you pass the profile here
+/>
 </div> 
 
             {isEditModalOpen && (

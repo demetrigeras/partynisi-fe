@@ -31,9 +31,9 @@ export const getAttendance = async (id) => {
     }
   };
 
-  export const getAttendanceRequestsForHost = async (hostId) => {
+  export const getAttendanceRequestsForHost = async (userId) => {
     try {
-      const response = await api.get(`/attend/host/${hostId}`);
+      const response = await api.get(`/attend/host/${userId}`);
       return response.data;
     } catch (error) {
       console.error(`Failed to get attendance requests for host - error: ${error}`);
