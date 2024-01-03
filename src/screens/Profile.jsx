@@ -117,6 +117,7 @@ const Profilehp = ({ user }) => {
       const requestData = {
         event: eventId,
         user: user.id, 
+        username: user.name, 
         status: "pending",
         profilename: profile.profilename,
       };
@@ -165,6 +166,7 @@ const Profilehp = ({ user }) => {
             existingEventData={currentEvent}
             userId={user.id}
           />
+          
         )}
       </div>
     )}
@@ -207,6 +209,8 @@ const Profilehp = ({ user }) => {
     </div>
     
   ))} 
+
+</div> 
 <Requests
   user={user}
   userRequests={userRequests}
@@ -215,7 +219,6 @@ const Profilehp = ({ user }) => {
   setHostEventRequests={setHostEventRequests}
   profile={profile} // Ensure you pass the profile here
 />
-</div> 
 
             {isEditModalOpen && (
               <EventEditModal
@@ -224,7 +227,9 @@ const Profilehp = ({ user }) => {
                 onEventUpdated={handleEventUpdated}
               />
             )}
+          
           </div>
+          
         // </div>
       ) : (
         <p>Loading profile...</p>

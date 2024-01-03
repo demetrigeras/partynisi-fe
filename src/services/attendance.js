@@ -62,7 +62,7 @@ export const createAttendace = async (attend) => {
     }
   };
 
-  export const updateAttendace = async (id, update) => {
+  export const updateAttendance = async (id, update) => {
     try {
       const response = await api.put(`/attend/${id}`, update);
       return response.data;
