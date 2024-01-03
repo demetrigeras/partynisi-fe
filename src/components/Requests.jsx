@@ -56,40 +56,36 @@ const Requests = ({ user, userRequests, setUserRequests, hostEventRequests, setH
 
       return (
         <div>
-            
-            {user.id === profile?.user && 
-            
-                <div className="Requests">
-                     <div className="titles">Your Requests to other Events</div>
-                    {userRequests.map((request) => (
-                        <div key={request._id} className="request-card">
-                             <p>UserName:{request.username}</p>
-                             <p>Profile for request:{request.profilename}</p>
-                            <p>Event: {request.event?.title}</p>
-                            <p>Status: {request.status}</p>
-                            
-                        </div>
-                    ))}
-                </div>
-            }
-            
-            {user.id === profile?.user && (
-                
-   <div className="host-requests">
-        <div className="titles">Requests to your Events</div>
-        {profileAttendances.map((attendance) => (
-            <div key={attendance._id} className="request-card">
-                <p>Requester: {attendance.username}</p>
-                <p>Event: {attendance.event?.title}</p>
-                <p>Status: {attendance.status}</p>
-                <button onClick={() => handleUpdateStatus(attendance._id, 'approved')}>Approve</button>
-                <button onClick={() => handleUpdateStatus(attendance._id, 'rejected')}>Reject</button>
-            </div>
-        ))}
-    </div>
-)}
+          {user.id === profile?.user && (
+            <>
+              <div className="titles">Your Requests to other Events</div>
+              <div className="Requests">
+                {userRequests.map((request) => (
+                  <div key={request._id} className="request-card">
+                    <p>UserName:{request.username}</p>
+                    <p>Profile for request:{request.profilename}</p>
+                    <p>Event: {request.event?.title}</p>
+                    <p>Status: {request.status}</p>
+                  </div>
+                ))}
+              </div>
+      
+              <div className="titles">Requests to your Events</div>
+              <div className="host-requests">
+                {profileAttendances.map((attendance) => (
+                  <div key={attendance._id} className="request-card">
+                    <p>Requester: {attendance.username}</p>
+                    <p>Event: {attendance.event?.title}</p>
+                    <p>Status: {attendance.status}</p>
+                    <button onClick={() => handleUpdateStatus(attendance._id, 'approved')}>Approve</button>
+                    <button onClick={() => handleUpdateStatus(attendance._id, 'rejected')}>Reject</button>
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
         </div>
-    );
-};
-
-export default Requests;
+      );
+                }
+      export default Requests;
+      

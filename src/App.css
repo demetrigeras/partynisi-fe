@@ -749,9 +749,8 @@ h2, p {
 } */
 
 /* RequestsStyles.css */
-.Requests .titles  {
- display: flex;
- margin-bottom: 20px;
+.titles  {
+
   font-size: 20px;
   font-weight: bold;
   /* Optional: color for the title */
