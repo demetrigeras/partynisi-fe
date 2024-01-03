@@ -1,14 +1,10 @@
 import React, { useState, useEffect} from "react";
-import { createAttendace, getAttendancesByUser, getAttendanceRequestsForHost } from "../services/attendance";
+import { createAttendace, getAttendancesByUser, getAttendancesByProfileName } from "../services/attendance";
 import { useParams } from "react-router-dom";
 
 const Requests = ({ user, userRequests, setUserRequests, hostEventRequests, setHostEventRequests, profile  }) => { 
 
-    // const [userRequests, setUserRequests] = useState([]);
-    // const [hostEventRequests, setHostEventRequests] = useState([]);
-    // const [profile, setProfile] = useState(null);
-    
-    // const { userId } = useParams();
+    const [profileAttendances, setProfileAttendances] = useState([]);
 
     useEffect(() => {
         const fetchUserRequests = async () => {
@@ -22,20 +18,24 @@ const Requests = ({ user, userRequests, setUserRequests, hostEventRequests, setH
         };
         fetchUserRequests();
       }, [user, setUserRequests]); // Include setUserRequests in the dependency array
-    
+
       useEffect(() => {
-        const fetchHostEventRequests = async () => {
+        const fetchProfileAttendances = async () => {
           try {
-            const hostRequests = await getAttendanceRequestsForHost(user.id);
-            setHostEventRequests(hostRequests); // Use setHostEventRequests to update state
-            console.log("Host requests:", hostRequests);
+            const attendances = await getAttendancesByProfileName(profile.profilename);
+            setProfileAttendances(attendances);
+            console.log("Profile attendances fetched:", attendances);
           } catch (error) {
-            console.error("Error fetching host event requests:", error);
+            console.error("Error fetching attendances by profile name:", error);
           }
         };
-        fetchHostEventRequests();
-      }, [user, setHostEventRequests]); 
-
+    
+        if (profile?.profilename) {
+          fetchProfileAttendances();
+        }
+      }, [profile?.profilename]);
+    
+   
 
       return (
         <div>
@@ -45,6 +45,7 @@ const Requests = ({ user, userRequests, setUserRequests, hostEventRequests, setH
                     {userRequests.map((request) => (
                         <div key={request._id} className="request-card">
                              <h2>Your Requests</h2>
+                             <p>Profile:{profile.profilename}</p>
                             <p>User: {user.name}</p>
                             <p>Event: {request.event.title}</p>
                             <p>Status: {request.status}</p>
@@ -52,20 +53,17 @@ const Requests = ({ user, userRequests, setUserRequests, hostEventRequests, setH
                     ))}
                 </div>
             }
-            
-            <div className="host-requests">
-                        {/* <h3>Requests to My Events</h3> */}
-                        {hostEventRequests.map((request) => (
-                            console.log("Request:", request, request.event.title),
-                            <div key={request._id} className="request-card">
-                                <p>User: {user.name}</p>
-                               <p>Event: {request.event.title}</p>
-                               <p>Requester: {request.user.name}</p>
-                               <p>Status: {request.status}</p>
-                                {/* Additional code to handle status update if needed */}
-                            </div>
-                        ))}
-                    </div>
+           <div className="host-requests">
+        <h2>Requests to Your Events</h2>
+        {profileAttendances.map((attendance) => (
+          <div key={attendance._id} className="request-card">
+            <p>Profile:{attendance.user.name}</p>
+            <p>Event: {attendance.event.title}</p>
+            <p>Status: {attendance.status}</p>
+            {/* Additional logic to display the requester's name, if needed */}
+          </div>
+        ))}
+      </div>
         </div>
     );
 };

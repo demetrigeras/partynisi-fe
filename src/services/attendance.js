@@ -40,6 +40,17 @@ export const getAttendance = async (id) => {
       throw error;
     }
   };
+
+  export const getAttendancesByProfileName = async (profilename) => {
+    try {
+      const response = await api.get(`/attend/profile/${profilename}`);
+      return response.data;
+    } catch (error) {
+      console.error(`Failed to get attendances by profile name - error: ${error}`);
+      throw error;
+    }
+  };
+  
   
 
 export const createAttendace = async (attend) => {

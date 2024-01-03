@@ -60,23 +60,7 @@ const Profilehp = ({ user }) => {
     fetchProfileData();
   }, [userId]);
 
-  useEffect(() => {
-    const fetchHostEventRequests = async () => {
-        if (profile && profile.user) {
-            try {
-                const hostRequests = await getAttendanceRequestsForHost(profile.user);
-                setHostEventRequests(hostRequests);
-                console.log("Host requests:", hostRequests);
-                console.log("Profile.user:", profile.user);
-            } catch (error) {
-                console.error("Error fetching host event requests:", error);
-            }
-        }
-    };
-    if (profile) {
-        fetchHostEventRequests();
-    }
-}, [profile]);
+  
 
   useEffect(() => {
     const fetchProfileData = async () => {
@@ -134,6 +118,7 @@ const Profilehp = ({ user }) => {
         event: eventId,
         user: user.id, 
         status: "pending",
+        profilename: profile.profilename,
       };
       await createAttendace(requestData);
       console.log("Request sent to attendace:", requestData);
