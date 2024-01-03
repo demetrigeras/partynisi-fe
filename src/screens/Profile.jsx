@@ -102,18 +102,18 @@ const Profilehp = ({ user }) => {
     setIsEditModalOpen(true);
   };
 
-  const handleRequestToAttend = async (eventId) => {
-    try {
-      const requestData = {
-        event: eventId,
-        user: user.id, 
-        status: "pending",
-      };
-      await createAttendace(requestData);
-    } catch (error) {
-      console.error("Error requesting to attend:", error);
-    }
-  };
+  // const handleRequestToAttend = async (eventId) => {
+  //   try {
+  //     const requestData = {
+  //       event: eventId,
+  //       user: user.id, 
+  //       status: "pending",
+  //     };
+  //     await createAttendace(requestData);
+  //   } catch (error) {
+  //     console.error("Error requesting to attend:", error);
+  //   }
+  // };
 
   return (
     <div className="profilepage" style={{ 
