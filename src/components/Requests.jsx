@@ -77,8 +77,8 @@ const Requests = ({ user, userRequests, setUserRequests, hostEventRequests, setH
                     <p>Requester: {attendance.username}</p>
                     <p>Event: {attendance.event?.title}</p>
                     <p>Status: {attendance.status}</p>
-                    <button onClick={() => handleUpdateStatus(attendance._id, 'approved')}>Approve</button>
-                    <button onClick={() => handleUpdateStatus(attendance._id, 'rejected')}>Reject</button>
+                    <button  onClick={() => handleUpdateStatus(attendance._id, 'approved')}>Approve</button>
+                    <button  onClick={() => handleUpdateStatus(attendance._id, 'rejected')}>Reject</button>
                   </div>
                 ))}
               </div>

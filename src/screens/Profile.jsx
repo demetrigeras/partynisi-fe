@@ -203,7 +203,7 @@ const Profilehp = ({ user }) => {
       
      
         {user.id !== profile.user && (
-        <button className="request-attend-button"onClick={() => handleRequestToAttend(event._id)}>
+        <button className="requestattendbutton" onClick={() => handleRequestToAttend(event._id)}>
           Request to Attend
         </button>
       )}
